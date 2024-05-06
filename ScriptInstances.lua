@@ -1,9 +1,6 @@
 -- Formerly created by NotYourDope on PS3, here implemented in Lua for Stand by IB_U_Z_Z_A_R_Dl.
 -- https://playersquared.com/threads/nyd-projects-collection-v3.3255/
 
-local joaat <const> = util.joaat
-
-local GET_NUMBER_OF_THREADS_RUNNING_THE_SCRIPT_WITH_THIS_HASH=function(...)return native_invoker.uno_int(0x2C83A9DA6BFFC4F9,...)end
 
 function pluralize(word, count)
     if count <= 1 then
@@ -13,6 +10,9 @@ function pluralize(word, count)
     end
 end
 
+
+local GET_NUMBER_OF_THREADS_RUNNING_THE_SCRIPT_WITH_THIS_HASH=function(...)return native_invoker.uno_int(0x2C83A9DA6BFFC4F9,...)end
+
 local generateFoundInstanceMessage = function(script_name, current_script_instances)
     return '"' .. script_name .. '"' .. " is active with " .. current_script_instances .. " " .. pluralize("instance", current_script_instances)
 end
@@ -21,1072 +21,1074 @@ local generateInstanceLostMessage = function(script_name)
     return '"' .. script_name .. '"' .. " is no longer active"
 end
 
--- [06/04/2024] These were scraped from OpenIV's path: "GTAV\update\update2.rpf\x64\levels\gta5\script\script_rel.rpf\".
+local joaat <const> = util.joaat
+
+-- [06/04/2024] These *.ysc scripts were scraped from OpenIV's path: "GTAV\update\update2.rpf\x64\levels\gta5\script\script_rel.rpf\".
 local scripts_list <const> = {
-    "abigail1", -- .ysc
-    "abigail2", -- .ysc
-    "achievement_controller", -- .ysc
-    "activity_creator_prototype_launcher", -- .ysc
-    "act_cinema", -- .ysc
-    "af_intro_t_sandy", -- .ysc
-    "agency_heist1", -- .ysc
-    "agency_heist2", -- .ysc
-    "agency_heist3a", -- .ysc
-    "agency_heist3b", -- .ysc
-    "agency_prep1", -- .ysc
-    "agency_prep2amb", -- .ysc
-    "aicover_test", -- .ysc
-    "ainewengland_test", -- .ysc
-    "altruist_cult", -- .ysc
-    "ambientblimp", -- .ysc
-    "ambient_diving", -- .ysc
-    "ambient_mrsphilips", -- .ysc
-    "ambient_solomon", -- .ysc
-    "ambient_sonar", -- .ysc
-    "ambient_tonya", -- .ysc
-    "ambient_tonyacall", -- .ysc
-    "ambient_tonyacall2", -- .ysc
-    "ambient_tonyacall5", -- .ysc
-    "ambient_ufos", -- .ysc
-    "am_agency_suv", -- .ysc
-    "am_airstrike", -- .ysc
-    "am_ammo_drop", -- .ysc
-    "am_arena_shp", -- .ysc
-    "am_armwrestling", -- .ysc
-    "am_armwrestling_apartment", -- .ysc
-    "am_armybase", -- .ysc
-    "am_backup_heli", -- .ysc
-    "am_beach_washup_cinematic", -- .ysc
-    "am_boat_taxi", -- .ysc
-    "am_bru_box", -- .ysc
-    "am_car_mod_tut", -- .ysc
-    "am_casino_limo", -- .ysc
-    "am_casino_luxury_car", -- .ysc
-    "am_casino_peds", -- .ysc
-    "am_challenges", -- .ysc
-    "am_contact_requests", -- .ysc
-    "am_cp_collection", -- .ysc
-    "am_crate_drop", -- .ysc
-    "am_criminal_damage", -- .ysc
-    "am_darts", -- .ysc
-    "am_darts_apartment", -- .ysc
-    "am_dead_drop", -- .ysc
-    "am_destroy_veh", -- .ysc
-    "am_distract_cops", -- .ysc
-    "am_doors", -- .ysc
-    "am_ferriswheel", -- .ysc
-    "am_gang_call", -- .ysc
-    "am_ga_pickups", -- .ysc
-    "am_heist_int", -- .ysc
-    "am_heli_taxi", -- .ysc
-    "am_hi_plane_land_cinematic", -- .ysc
-    "am_hi_plane_take_off_cinematic", -- .ysc
-    "am_hold_up", -- .ysc
-    "am_hot_property", -- .ysc
-    "am_hot_target", -- .ysc
-    "am_hs4_isd_take_vel", -- .ysc
-    "am_hs4_lsa_land_nimb_arrive", -- .ysc
-    "am_hs4_lsa_land_vel", -- .ysc
-    "am_hs4_lsa_take_vel", -- .ysc
-    "am_hs4_nimb_isd_lsa_leave", -- .ysc
-    "am_hs4_nimb_lsa_isd_arrive", -- .ysc
-    "am_hs4_nimb_lsa_isd_leave", -- .ysc
-    "am_hs4_vel_lsa_isd", -- .ysc
-    "am_hunt_the_beast", -- .ysc
-    "am_imp_exp", -- .ysc
-    "am_island_backup_heli", -- .ysc
-    "am_joyrider", -- .ysc
-    "am_kill_list", -- .ysc
-    "am_king_of_the_castle", -- .ysc
-    "am_launcher", -- .ysc
-    "am_lester_cut", -- .ysc
-    "am_lowrider_int", -- .ysc
-    "am_lsia_take_off_cinematic", -- .ysc
-    "am_luxury_showroom", -- .ysc
-    "am_mission_launch", -- .ysc
-    "am_mp_acid_lab", -- .ysc
-    "am_mp_arcade", -- .ysc
-    "am_mp_arcade_claw_crane", -- .ysc
-    "am_mp_arcade_fortune_teller", -- .ysc
-    "am_mp_arcade_love_meter", -- .ysc
-    "am_mp_arcade_peds", -- .ysc
-    "am_mp_arcade_strength_test", -- .ysc
-    "am_mp_arc_cab_manager", -- .ysc
-    "am_mp_arena_box", -- .ysc
-    "am_mp_arena_garage", -- .ysc
-    "am_mp_armory_aircraft", -- .ysc
-    "am_mp_armory_truck", -- .ysc
-    "am_mp_auto_shop", -- .ysc
-    "am_mp_biker_warehouse", -- .ysc
-    "am_mp_boardroom_seating", -- .ysc
-    "am_mp_bunker", -- .ysc
-    "am_mp_business_hub", -- .ysc
-    "am_mp_carwash_launch", -- .ysc
-    "am_mp_car_meet_property", -- .ysc
-    "am_mp_car_meet_sandbox", -- .ysc
-    "am_mp_casino", -- .ysc
-    "am_mp_casino_apartment", -- .ysc
-    "am_mp_casino_nightclub", -- .ysc
-    "am_mp_casino_valet_garage", -- .ysc
-    "am_mp_creator_aircraft", -- .ysc
-    "am_mp_creator_trailer", -- .ysc
-    "am_mp_defunct_base", -- .ysc
-    "am_mp_drone", -- .ysc
-    "am_mp_fixer_hq", -- .ysc
-    "am_mp_garage_control", -- .ysc
-    "am_mp_hacker_truck", -- .ysc
-    "am_mp_hangar", -- .ysc
-    "am_mp_ie_warehouse", -- .ysc
-    "am_mp_island", -- .ysc
-    "am_mp_juggalo_hideout", -- .ysc
-    "am_mp_multistorey_garage", -- .ysc
-    "am_mp_music_studio", -- .ysc
-    "am_mp_nightclub", -- .ysc
-    "am_mp_orbital_cannon", -- .ysc
-    "am_mp_peds", -- .ysc
-    "am_mp_property_ext", -- .ysc
-    "am_mp_property_int", -- .ysc
-    "am_mp_rc_vehicle", -- .ysc
-    "am_mp_salvage_yard", -- .ysc
-    "am_mp_shooting_range", -- .ysc
-    "am_mp_simeon_showroom", -- .ysc
-    "am_mp_smoking_activity", -- .ysc
-    "am_mp_smpl_interior_ext", -- .ysc
-    "am_mp_smpl_interior_int", -- .ysc
-    "am_mp_social_club_garage", -- .ysc
-    "am_mp_solomon_office", -- .ysc
-    "am_mp_submarine", -- .ysc
-    "am_mp_vehicle_organization_menu", -- .ysc
-    "am_mp_vehicle_reward", -- .ysc
-    "am_mp_vehicle_weapon", -- .ysc
-    "am_mp_vinewood_premium_garage", -- .ysc
-    "am_mp_warehouse", -- .ysc
-    "am_mp_yacht", -- .ysc
-    "am_npc_invites", -- .ysc
-    "am_pass_the_parcel", -- .ysc
-    "am_penned_in", -- .ysc
-    "am_penthouse_peds", -- .ysc
-    "am_pi_menu", -- .ysc
-    "am_plane_takedown", -- .ysc
-    "am_prison", -- .ysc
-    "am_prostitute", -- .ysc
-    "am_rollercoaster", -- .ysc
-    "am_rontrevor_cut", -- .ysc
-    "am_taxi", -- .ysc
-    "am_vehicle_spawn", -- .ysc
-    "animal_controller", -- .ysc
-    "apartment_minigame_launcher", -- .ysc
-    "apparcadebusiness", -- .ysc
-    "apparcadebusinesshub", -- .ysc
-    "appavengeroperations", -- .ysc
-    "appbikerbusiness", -- .ysc
-    "appbroadcast", -- .ysc
-    "appbunkerbusiness", -- .ysc
-    "appbusinesshub", -- .ysc
-    "appcamera", -- .ysc
-    "appchecklist", -- .ysc
-    "appcontacts", -- .ysc
-    "appcovertops", -- .ysc
-    "appemail", -- .ysc
-    "appextraction", -- .ysc
-    "appfixersecurity", -- .ysc
-    "apphackertruck", -- .ysc
-    "apphs_sleep", -- .ysc
-    "appimportexport", -- .ysc
-    "appinternet", -- .ysc
-    "appjipmp", -- .ysc
-    "appmedia", -- .ysc
-    "appmpbossagency", -- .ysc
-    "appmpemail", -- .ysc
-    "appmpjoblistnew", -- .ysc
-    "apporganiser", -- .ysc
-    "appprogresshub", -- .ysc
-    "apprepeatplay", -- .ysc
-    "appsecurohack", -- .ysc
-    "appsecuroserv", -- .ysc
-    "appsettings", -- .ysc
-    "appsidetask", -- .ysc
-    "appsmuggler", -- .ysc
-    "apptextmessage", -- .ysc
-    "apptrackify", -- .ysc
-    "appvlsi", -- .ysc
-    "appzit", -- .ysc
-    "arcade_seating", -- .ysc
-    "arena_box_bench_seats", -- .ysc
-    "arena_carmod", -- .ysc
-    "arena_workshop_seats", -- .ysc
-    "armenian1", -- .ysc
-    "armenian2", -- .ysc
-    "armenian3", -- .ysc
-    "armory_aircraft_carmod", -- .ysc
-    "assassin_bus", -- .ysc
-    "assassin_construction", -- .ysc
-    "assassin_hooker", -- .ysc
-    "assassin_multi", -- .ysc
-    "assassin_rankup", -- .ysc
-    "assassin_valet", -- .ysc
-    "atm_trigger", -- .ysc
-    "audiotest", -- .ysc
-    "autosave_controller", -- .ysc
-    "auto_shop_seating", -- .ysc
-    "bailbond1", -- .ysc
-    "bailbond2", -- .ysc
-    "bailbond3", -- .ysc
-    "bailbond4", -- .ysc
-    "bailbond_launcher", -- .ysc
-    "barry1", -- .ysc
-    "barry2", -- .ysc
-    "barry3", -- .ysc
-    "barry3a", -- .ysc
-    "barry3c", -- .ysc
-    "barry4", -- .ysc
-    "base_carmod", -- .ysc
-    "base_corridor_seats", -- .ysc
-    "base_entrance_seats", -- .ysc
-    "base_heist_seats", -- .ysc
-    "base_lounge_seats", -- .ysc
-    "base_quaters_seats", -- .ysc
-    "base_reception_seats", -- .ysc
-    "basic_creator", -- .ysc
-    "beach_exterior_seating", -- .ysc
-    "benchmark", -- .ysc
-    "bigwheel", -- .ysc
-    "bj", -- .ysc
-    "blackjack", -- .ysc
-    "blimptest", -- .ysc
-    "blip_controller", -- .ysc
-    "bootycallhandler", -- .ysc
-    "bootycall_debug_controller", -- .ysc
-    "buddydeathresponse", -- .ysc
-    "bugstar_mission_export", -- .ysc
-    "buildingsiteambience", -- .ysc
-    "building_controller", -- .ysc
-    "business_battles", -- .ysc
-    "business_battles_defend", -- .ysc
-    "business_battles_sell", -- .ysc
-    "business_hub_carmod", -- .ysc
-    "business_hub_garage_seats", -- .ysc
-    "cablecar", -- .ysc
-    "camera_test", -- .ysc
-    "camhedz_arcade", -- .ysc
-    "cam_coord_sender", -- .ysc
-    "candidate_controller", -- .ysc
-    "carmod_shop", -- .ysc
-    "carsteal1", -- .ysc
-    "carsteal2", -- .ysc
-    "carsteal3", -- .ysc
-    "carsteal4", -- .ysc
-    "carwash1", -- .ysc
-    "carwash2", -- .ysc
-    "car_meet_carmod", -- .ysc
-    "car_meet_exterior_seating", -- .ysc
-    "car_meet_interior_seating", -- .ysc
-    "car_roof_test", -- .ysc
-    "casinoroulette", -- .ysc
-    "casino_bar_seating", -- .ysc
-    "casino_exterior_seating", -- .ysc
-    "casino_interior_seating", -- .ysc
-    "casino_lucky_wheel", -- .ysc
-    "casino_main_lounge_seating", -- .ysc
-    "casino_nightclub_seating", -- .ysc
-    "casino_penthouse_seating", -- .ysc
-    "casino_slots", -- .ysc
-    "celebrations", -- .ysc
-    "celebration_editor", -- .ysc
-    "cellphone_controller", -- .ysc
-    "cellphone_flashhand", -- .ysc
-    "charactergoals", -- .ysc
-    "charanimtest", -- .ysc
-    "cheat_controller", -- .ysc
-    "chinese1", -- .ysc
-    "chinese2", -- .ysc
-    "chop", -- .ysc
-    "clothes_shop_mp", -- .ysc
-    "clothes_shop_sp", -- .ysc
-    "code_controller", -- .ysc
-    "combat_test", -- .ysc
-    "comms_controller", -- .ysc
-    "completionpercentage_controller", -- .ysc
-    "component_checker", -- .ysc
-    "context_controller", -- .ysc
-    "controller_ambientarea", -- .ysc
-    "controller_races", -- .ysc
-    "controller_taxi", -- .ysc
-    "controller_towing", -- .ysc
-    "controller_trafficking", -- .ysc
-    "coordinate_recorder", -- .ysc
-    "country_race", -- .ysc
-    "country_race_controller", -- .ysc
-    "creation_startup", -- .ysc
-    "creator", -- .ysc
-    "custom_config", -- .ysc
-    "cutscenemetrics", -- .ysc
-    "cutscenesamples", -- .ysc
-    "cutscene_test", -- .ysc
-    "darts", -- .ysc
-    "debug", -- .ysc
-    "debug_app_select_screen", -- .ysc
-    "debug_clone_outfit_testing", -- .ysc
-    "debug_launcher", -- .ysc
-    "debug_ped_data", -- .ysc
-    "degenatron_games", -- .ysc
-    "density_test", -- .ysc
-    "dialogue_handler", -- .ysc
-    "director_mode", -- .ysc
-    "docks2asubhandler", -- .ysc
-    "docks_heista", -- .ysc
-    "docks_heistb", -- .ysc
-    "docks_prep1", -- .ysc
-    "docks_prep2b", -- .ysc
-    "docks_setup", -- .ysc
-    "dont_cross_the_line", -- .ysc
-    "dreyfuss1", -- .ysc
-    "drf1", -- .ysc
-    "drf2", -- .ysc
-    "drf3", -- .ysc
-    "drf4", -- .ysc
-    "drf5", -- .ysc
-    "drunk", -- .ysc
-    "drunk_controller", -- .ysc
-    "dynamixtest", -- .ysc
-    "email_controller", -- .ysc
-    "emergencycall", -- .ysc
-    "emergencycalllauncher", -- .ysc
-    "epscars", -- .ysc
-    "epsdesert", -- .ysc
-    "epsilon1", -- .ysc
-    "epsilon2", -- .ysc
-    "epsilon3", -- .ysc
-    "epsilon4", -- .ysc
-    "epsilon5", -- .ysc
-    "epsilon6", -- .ysc
-    "epsilon7", -- .ysc
-    "epsilon8", -- .ysc
-    "epsilontract", -- .ysc
-    "epsrobes", -- .ysc
-    "error_listener", -- .ysc
-    "error_thrower", -- .ysc
-    "event_controller", -- .ysc
-    "exile1", -- .ysc
-    "exile2", -- .ysc
-    "exile3", -- .ysc
-    "exile_city_denial", -- .ysc
-    "extreme1", -- .ysc
-    "extreme2", -- .ysc
-    "extreme3", -- .ysc
-    "extreme4", -- .ysc
-    "fairgroundhub", -- .ysc
-    "fake_interiors", -- .ysc
-    "fameorshame_eps", -- .ysc
-    "fameorshame_eps_1", -- .ysc
-    "fame_or_shame_set", -- .ysc
-    "family1", -- .ysc
-    "family1taxi", -- .ysc
-    "family2", -- .ysc
-    "family3", -- .ysc
-    "family4", -- .ysc
-    "family5", -- .ysc
-    "family6", -- .ysc
-    "family_scene_f0", -- .ysc
-    "family_scene_f1", -- .ysc
-    "family_scene_m", -- .ysc
-    "family_scene_t0", -- .ysc
-    "family_scene_t1", -- .ysc
-    "fanatic1", -- .ysc
-    "fanatic2", -- .ysc
-    "fanatic3", -- .ysc
-    "fbi1", -- .ysc
-    "fbi2", -- .ysc
-    "fbi3", -- .ysc
-    "fbi4", -- .ysc
-    "fbi4_intro", -- .ysc
-    "fbi4_prep1", -- .ysc
-    "fbi4_prep2", -- .ysc
-    "fbi4_prep3", -- .ysc
-    "fbi4_prep3amb", -- .ysc
-    "fbi4_prep4", -- .ysc
-    "fbi4_prep5", -- .ysc
-    "fbi5a", -- .ysc
-    "finalea", -- .ysc
-    "finaleb", -- .ysc
-    "finalec1", -- .ysc
-    "finalec2", -- .ysc
-    "finale_choice", -- .ysc
-    "finale_credits", -- .ysc
-    "finale_endgame", -- .ysc
-    "finale_heist1", -- .ysc
-    "finale_heist2a", -- .ysc
-    "finale_heist2b", -- .ysc
-    "finale_heist2_intro", -- .ysc
-    "finale_heist_prepa", -- .ysc
-    "finale_heist_prepb", -- .ysc
-    "finale_heist_prepc", -- .ysc
-    "finale_heist_prepd", -- .ysc
-    "finale_heist_prepeamb", -- .ysc
-    "finale_intro", -- .ysc
-    "fixer_hq_carmod", -- .ysc
-    "fixer_hq_seating", -- .ysc
-    "fixer_hq_seating_op_floor", -- .ysc
-    "fixer_hq_seating_pq", -- .ysc
-    "floating_help_controller", -- .ysc
-    "flowintrotitle", -- .ysc
-    "flowstartaccept", -- .ysc
-    "flow_autoplay", -- .ysc
-    "flow_controller", -- .ysc
-    "flow_help", -- .ysc
-    "flyunderbridges", -- .ysc
-    "fmmc_contentquicklauncher", -- .ysc
-    "fmmc_launcher", -- .ysc
-    "fmmc_playlist_controller", -- .ysc
-    "fm_bj_race_controler", -- .ysc
-    "fm_capture_creator", -- .ysc
-    "fm_content_acid_lab_sell", -- .ysc
-    "fm_content_acid_lab_setup", -- .ysc
-    "fm_content_acid_lab_source", -- .ysc
-    "fm_content_ammunation", -- .ysc
-    "fm_content_armoured_truck", -- .ysc
-    "fm_content_auto_shop_delivery", -- .ysc
-    "fm_content_bank_shootout", -- .ysc
-    "fm_content_bar_resupply", -- .ysc
-    "fm_content_bicycle_time_trial", -- .ysc
-    "fm_content_bike_shop_delivery", -- .ysc
-    "fm_content_business_battles", -- .ysc
-    "fm_content_cargo", -- .ysc
-    "fm_content_cerberus", -- .ysc
-    "fm_content_chop_shop_delivery", -- .ysc
-    "fm_content_clubhouse_contracts", -- .ysc
-    "fm_content_club_management", -- .ysc
-    "fm_content_club_odd_jobs", -- .ysc
-    "fm_content_club_source", -- .ysc
-    "fm_content_convoy", -- .ysc
-    "fm_content_crime_scene", -- .ysc
-    "fm_content_drug_lab_work", -- .ysc
-    "fm_content_drug_vehicle", -- .ysc
-    "fm_content_export_cargo", -- .ysc
-    "fm_content_ghosthunt", -- .ysc
-    "fm_content_golden_gun", -- .ysc
-    "fm_content_gunrunning", -- .ysc
-    "fm_content_hsw_setup", -- .ysc
-    "fm_content_hsw_time_trial", -- .ysc
-    "fm_content_island_dj", -- .ysc
-    "fm_content_island_heist", -- .ysc
-    "fm_content_metal_detector", -- .ysc
-    "fm_content_movie_props", -- .ysc
-    "fm_content_mp_intro", -- .ysc
-    "fm_content_parachuter", -- .ysc
-    "fm_content_payphone_hit", -- .ysc
-    "fm_content_phantom_car", -- .ysc
-    "fm_content_possessed_animals", -- .ysc
-    "fm_content_robbery", -- .ysc
-    "fm_content_security_contract", -- .ysc
-    "fm_content_sightseeing", -- .ysc
-    "fm_content_skydive", -- .ysc
-    "fm_content_slasher", -- .ysc
-    "fm_content_smuggler_ops", -- .ysc
-    "fm_content_smuggler_plane", -- .ysc
-    "fm_content_smuggler_resupply", -- .ysc
-    "fm_content_smuggler_sell", -- .ysc
-    "fm_content_smuggler_trail", -- .ysc
-    "fm_content_source_research", -- .ysc
-    "fm_content_stash_house", -- .ysc
-    "fm_content_taxi_driver", -- .ysc
-    "fm_content_test", -- .ysc
-    "fm_content_tow_truck_work", -- .ysc
-    "fm_content_tuner_robbery", -- .ysc
-    "fm_content_vehicle_list", -- .ysc
-    "fm_content_vehrob_arena", -- .ysc
-    "fm_content_vehrob_cargo_ship", -- .ysc
-    "fm_content_vehrob_casino_prize", -- .ysc
-    "fm_content_vehrob_disrupt", -- .ysc
-    "fm_content_vehrob_police", -- .ysc
-    "fm_content_vehrob_prep", -- .ysc
-    "fm_content_vehrob_scoping", -- .ysc
-    "fm_content_vehrob_submarine", -- .ysc
-    "fm_content_vehrob_task", -- .ysc
-    "fm_content_vip_contract_1", -- .ysc
-    "fm_content_xmas_mugger", -- .ysc
-    "fm_content_xmas_truck", -- .ysc
-    "fm_deathmatch_controler", -- .ysc
-    "fm_deathmatch_creator", -- .ysc
-    "fm_hideout_controler", -- .ysc
-    "fm_hold_up_tut", -- .ysc
-    "fm_horde_controler", -- .ysc
-    "fm_impromptu_dm_controler", -- .ysc
-    "fm_intro", -- .ysc
-    "fm_intro_cut_dev", -- .ysc
-    "fm_lts_creator", -- .ysc
-    "fm_maintain_cloud_header_data", -- .ysc
-    "fm_maintain_transition_players", -- .ysc
-    "fm_main_menu", -- .ysc
-    "fm_mission_controller", -- .ysc
-    "fm_mission_controller_2020", -- .ysc
-    "fm_mission_creator", -- .ysc
-    "fm_race_controler", -- .ysc
-    "fm_race_creator", -- .ysc
-    "fm_street_dealer", -- .ysc
-    "fm_survival_controller", -- .ysc
-    "fm_survival_creator", -- .ysc
-    "forsalesigns", -- .ysc
-    "fps_test", -- .ysc
-    "fps_test_mag", -- .ysc
-    "franklin0", -- .ysc
-    "franklin1", -- .ysc
-    "franklin2", -- .ysc
-    "freemode", -- .ysc
-    "freemode_clearglobals", -- .ysc
-    "freemode_creator", -- .ysc
-    "freemode_init", -- .ysc
-    "friendactivity", -- .ysc
-    "friends_controller", -- .ysc
-    "friends_debug_controller", -- .ysc
-    "fullmap_test", -- .ysc
-    "fullmap_test_flow", -- .ysc
-    "game_server_test", -- .ysc
-    "gb_airfreight", -- .ysc
-    "gb_amphibious_assault", -- .ysc
-    "gb_assault", -- .ysc
-    "gb_bank_job", -- .ysc
-    "gb_bellybeast", -- .ysc
-    "gb_biker_bad_deal", -- .ysc
-    "gb_biker_burn_assets", -- .ysc
-    "gb_biker_contraband_defend", -- .ysc
-    "gb_biker_contraband_sell", -- .ysc
-    "gb_biker_contract_killing", -- .ysc
-    "gb_biker_criminal_mischief", -- .ysc
-    "gb_biker_destroy_vans", -- .ysc
-    "gb_biker_driveby_assassin", -- .ysc
-    "gb_biker_free_prisoner", -- .ysc
-    "gb_biker_joust", -- .ysc
-    "gb_biker_last_respects", -- .ysc
-    "gb_biker_race_p2p", -- .ysc
-    "gb_biker_rescue_contact", -- .ysc
-    "gb_biker_rippin_it_up", -- .ysc
-    "gb_biker_safecracker", -- .ysc
-    "gb_biker_search_and_destroy", -- .ysc
-    "gb_biker_shuttle", -- .ysc
-    "gb_biker_stand_your_ground", -- .ysc
-    "gb_biker_steal_bikes", -- .ysc
-    "gb_biker_target_rival", -- .ysc
-    "gb_biker_unload_weapons", -- .ysc
-    "gb_biker_wheelie_rider", -- .ysc
-    "gb_carjacking", -- .ysc
-    "gb_cashing_out", -- .ysc
-    "gb_casino", -- .ysc
-    "gb_casino_heist", -- .ysc
-    "gb_casino_heist_planning", -- .ysc
-    "gb_collect_money", -- .ysc
-    "gb_contraband_buy", -- .ysc
-    "gb_contraband_defend", -- .ysc
-    "gb_contraband_sell", -- .ysc
-    "gb_data_hack", -- .ysc
-    "gb_deathmatch", -- .ysc
-    "gb_delivery", -- .ysc
-    "gb_finderskeepers", -- .ysc
-    "gb_fivestar", -- .ysc
-    "gb_fortified", -- .ysc
-    "gb_fragile_goods", -- .ysc
-    "gb_fully_loaded", -- .ysc
-    "gb_gangops", -- .ysc
-    "gb_gang_ops_planning", -- .ysc
-    "gb_gunrunning", -- .ysc
-    "gb_gunrunning_defend", -- .ysc
-    "gb_gunrunning_delivery", -- .ysc
-    "gb_headhunter", -- .ysc
-    "gb_hunt_the_boss", -- .ysc
-    "gb_ie_delivery_cutscene", -- .ysc
-    "gb_illicit_goods_resupply", -- .ysc
-    "gb_infiltration", -- .ysc
-    "gb_jewel_store_grab", -- .ysc
-    "gb_ploughed", -- .ysc
-    "gb_point_to_point", -- .ysc
-    "gb_ramped_up", -- .ysc
-    "gb_rob_shop", -- .ysc
-    "gb_salvage", -- .ysc
-    "gb_security_van", -- .ysc
-    "gb_sightseer", -- .ysc
-    "gb_smuggler", -- .ysc
-    "gb_stockpiling", -- .ysc
-    "gb_target_pursuit", -- .ysc
-    "gb_terminate", -- .ysc
-    "gb_transporter", -- .ysc
-    "gb_vehicle_export", -- .ysc
-    "gb_velocity", -- .ysc
-    "gb_yacht_rob", -- .ysc
-    "general_test", -- .ysc
-    "ggsm_arcade", -- .ysc
-    "globals_fmmcstruct2_registration", -- .ysc
-    "globals_fmmc_struct_registration", -- .ysc
-    "golf", -- .ysc
-    "golf_ai_foursome", -- .ysc
-    "golf_ai_foursome_putting", -- .ysc
-    "golf_mp", -- .ysc
-    "gpb_andymoon", -- .ysc
-    "gpb_baygor", -- .ysc
-    "gpb_billbinder", -- .ysc
-    "gpb_clinton", -- .ysc
-    "gpb_griff", -- .ysc
-    "gpb_jane", -- .ysc
-    "gpb_jerome", -- .ysc
-    "gpb_jesse", -- .ysc
-    "gpb_mani", -- .ysc
-    "gpb_mime", -- .ysc
-    "gpb_pameladrake", -- .ysc
-    "gpb_superhero", -- .ysc
-    "gpb_tonya", -- .ysc
-    "gpb_zombie", -- .ysc
-    "grid_arcade_cabinet", -- .ysc
-    "gtest_airplane", -- .ysc
-    "gtest_avoidance", -- .ysc
-    "gtest_boat", -- .ysc
-    "gtest_divingfromcar", -- .ysc
-    "gtest_divingfromcarwhilefleeing", -- .ysc
-    "gtest_helicopter", -- .ysc
-    "gtest_nearlymissedbycar", -- .ysc
-    "gunclub_shop", -- .ysc
-    "gunfighttest", -- .ysc
-    "gunslinger_arcade", -- .ysc
-    "hacker_truck_carmod", -- .ysc
-    "hairdo_shop_mp", -- .ysc
-    "hairdo_shop_sp", -- .ysc
-    "hangar_carmod", -- .ysc
-    "hao1", -- .ysc
-    "headertest", -- .ysc
-    "heatmap_test", -- .ysc
-    "heatmap_test_flow", -- .ysc
-    "heist_ctrl_agency", -- .ysc
-    "heist_ctrl_docks", -- .ysc
-    "heist_ctrl_finale", -- .ysc
-    "heist_ctrl_jewel", -- .ysc
-    "heist_ctrl_rural", -- .ysc
-    "heist_island_planning", -- .ysc
-    "heli_gun", -- .ysc
-    "heli_streaming", -- .ysc
-    "hud_creator", -- .ysc
-    "hunting1", -- .ysc
-    "hunting2", -- .ysc
-    "hunting_ambient", -- .ysc
-    "idlewarper", -- .ysc
-    "ingamehud", -- .ysc
-    "initial", -- .ysc
-    "item_ownership_output", -- .ysc
-    "jewelry_heist", -- .ysc
-    "jewelry_prep1a", -- .ysc
-    "jewelry_prep1b", -- .ysc
-    "jewelry_prep2a", -- .ysc
-    "jewelry_setup1", -- .ysc
-    "josh1", -- .ysc
-    "josh2", -- .ysc
-    "josh3", -- .ysc
-    "josh4", -- .ysc
-    "juggalo_hideout_carmod", -- .ysc
-    "juggalo_hideout_seating", -- .ysc
-    "lamar1", -- .ysc
-    "landing_pre_startup", -- .ysc
-    "laptop_trigger", -- .ysc
-    "launcher_abigail", -- .ysc
-    "launcher_barry", -- .ysc
-    "launcher_basejumpheli", -- .ysc
-    "launcher_basejumppack", -- .ysc
-    "launcher_carwash", -- .ysc
-    "launcher_darts", -- .ysc
-    "launcher_dreyfuss", -- .ysc
-    "launcher_epsilon", -- .ysc
-    "launcher_extreme", -- .ysc
-    "launcher_fanatic", -- .ysc
-    "launcher_golf", -- .ysc
-    "launcher_hao", -- .ysc
-    "launcher_hunting", -- .ysc
-    "launcher_hunting_ambient", -- .ysc
-    "launcher_josh", -- .ysc
-    "launcher_maude", -- .ysc
-    "launcher_minute", -- .ysc
-    "launcher_mrsphilips", -- .ysc
-    "launcher_nigel", -- .ysc
-    "launcher_offroadracing", -- .ysc
-    "launcher_omega", -- .ysc
-    "launcher_paparazzo", -- .ysc
-    "launcher_pilotschool", -- .ysc
-    "launcher_racing", -- .ysc
-    "launcher_rampage", -- .ysc
-    "launcher_range", -- .ysc
-    "launcher_stunts", -- .ysc
-    "launcher_tennis", -- .ysc
-    "launcher_thelastone", -- .ysc
-    "launcher_tonya", -- .ysc
-    "launcher_triathlon", -- .ysc
-    "launcher_yoga", -- .ysc
-    "lester1", -- .ysc
-    "lesterhandler", -- .ysc
-    "letterscraps", -- .ysc
-    "line_activation_test", -- .ysc
-    "liverecorder", -- .ysc
-    "locates_tester", -- .ysc
-    "luxe_veh_activity", -- .ysc
-    "magdemo", -- .ysc
-    "magdemo2", -- .ysc
-    "main", -- .ysc
-    "maintransition", -- .ysc
-    "main_install", -- .ysc
-    "main_persistent", -- .ysc
-    "martin1", -- .ysc
-    "maude1", -- .ysc
-    "maude_postbailbond", -- .ysc
-    "me_amanda1", -- .ysc
-    "me_jimmy1", -- .ysc
-    "me_tracey1", -- .ysc
-    "mg_race_to_point", -- .ysc
-    "michael1", -- .ysc
-    "michael2", -- .ysc
-    "michael3", -- .ysc
-    "michael4", -- .ysc
-    "michael4leadout", -- .ysc
-    "minigame_ending_stinger", -- .ysc
-    "minigame_stats_tracker", -- .ysc
-    "minute1", -- .ysc
-    "minute2", -- .ysc
-    "minute3", -- .ysc
-    "missioniaaturret", -- .ysc
-    "mission_race", -- .ysc
-    "mission_repeat_controller", -- .ysc
-    "mission_stat_alerter", -- .ysc
-    "mission_stat_watcher", -- .ysc
-    "mission_triggerer_a", -- .ysc
-    "mission_triggerer_b", -- .ysc
-    "mission_triggerer_c", -- .ysc
-    "mission_triggerer_d", -- .ysc
-    "mmmm", -- .ysc
-    "mpstatsinit", -- .ysc
-    "mptestbed", -- .ysc
-    "mp_awards", -- .ysc
-    "mp_bed_high", -- .ysc
-    "mp_fm_registration", -- .ysc
-    "mp_gameplay_menu", -- .ysc
-    "mp_menuped", -- .ysc
-    "mp_player_damage_numbers", -- .ysc
-    "mp_prop_global_block", -- .ysc
-    "mp_prop_special_global_block", -- .ysc
-    "mp_registration", -- .ysc
-    "mp_save_game_global_block", -- .ysc
-    "mp_skycam_stuck_wiggler", -- .ysc
-    "mp_unlocks", -- .ysc
-    "mp_weapons", -- .ysc
-    "mrsphilips1", -- .ysc
-    "mrsphilips2", -- .ysc
-    "multistorey_garage_ext_seating", -- .ysc
-    "multistorey_garage_seating", -- .ysc
-    "murdermystery", -- .ysc
-    "music_studio_seating", -- .ysc
-    "music_studio_seating_external", -- .ysc
-    "music_studio_smoking", -- .ysc
-    "navmeshtest", -- .ysc
-    "net_activity_creator_ui", -- .ysc
-    "net_apartment_activity", -- .ysc
-    "net_apartment_activity_light", -- .ysc
-    "net_bot_brain", -- .ysc
-    "net_bot_simplebrain", -- .ysc
-    "net_cloud_mission_loader", -- .ysc
-    "net_combat_soaktest", -- .ysc
-    "net_freemode_debug_2023", -- .ysc
-    "net_freemode_debug_stat_2023", -- .ysc
-    "net_jacking_soaktest", -- .ysc
-    "net_session_soaktest", -- .ysc
-    "net_test_drive", -- .ysc
-    "net_tunable_check", -- .ysc
-    "nigel1", -- .ysc
-    "nigel1a", -- .ysc
-    "nigel1b", -- .ysc
-    "nigel1c", -- .ysc
-    "nigel1d", -- .ysc
-    "nigel2", -- .ysc
-    "nigel3", -- .ysc
-    "nightclubpeds", -- .ysc
-    "nightclub_ground_floor_seats", -- .ysc
-    "nightclub_office_seats", -- .ysc
-    "nightclub_vip_seats", -- .ysc
-    "nodemenututorial", -- .ysc
-    "nodeviewer", -- .ysc
-    "ob_abatdoor", -- .ysc
-    "ob_abattoircut", -- .ysc
-    "ob_airdancer", -- .ysc
-    "ob_bong", -- .ysc
-    "ob_cashregister", -- .ysc
-    "ob_drinking_shots", -- .ysc
-    "ob_found_instancery_cauldron", -- .ysc
-    "ob_franklin_beer", -- .ysc
-    "ob_franklin_tv", -- .ysc
-    "ob_franklin_wine", -- .ysc
-    "ob_huffing_gas", -- .ysc
-    "ob_jukebox", -- .ysc
-    "ob_mp_bed_high", -- .ysc
-    "ob_mp_bed_low", -- .ysc
-    "ob_mp_bed_med", -- .ysc
-    "ob_mp_shower_med", -- .ysc
-    "ob_mp_stripper", -- .ysc
-    "ob_mr_raspberry_jam", -- .ysc
-    "ob_poledancer", -- .ysc
-    "ob_sofa_franklin", -- .ysc
-    "ob_sofa_michael", -- .ysc
-    "ob_telescope", -- .ysc
-    "ob_tv", -- .ysc
-    "ob_vend1", -- .ysc
-    "ob_vend2", -- .ysc
-    "ob_wheatgrass", -- .ysc
-    "offroad_races", -- .ysc
-    "omega1", -- .ysc
-    "omega2", -- .ysc
-    "paparazzo1", -- .ysc
-    "paparazzo2", -- .ysc
-    "paparazzo3", -- .ysc
-    "paparazzo3a", -- .ysc
-    "paparazzo3b", -- .ysc
-    "paparazzo4", -- .ysc
-    "paradise", -- .ysc
-    "paradise2", -- .ysc
-    "pausemenu", -- .ysc
-    "pausemenucareerhublaunch", -- .ysc
-    "pausemenu_example", -- .ysc
-    "pausemenu_map", -- .ysc
-    "pausemenu_multiplayer", -- .ysc
-    "pausemenu_sp_repeat", -- .ysc
-    "pb_busker", -- .ysc
-    "pb_homeless", -- .ysc
-    "pb_preacher", -- .ysc
-    "pb_prostitute", -- .ysc
-    "personal_carmod_shop", -- .ysc
-    "photographymonkey", -- .ysc
-    "photographywildlife", -- .ysc
-    "physics_perf_test", -- .ysc
-    "physics_perf_test_launcher", -- .ysc
-    "pickuptest", -- .ysc
-    "pickupvehicles", -- .ysc
-    "pickup_controller", -- .ysc
-    "pilot_school", -- .ysc
-    "pilot_school_mp", -- .ysc
-    "pi_menu", -- .ysc
-    "placeholdermission", -- .ysc
-    "placementtest", -- .ysc
-    "planewarptest", -- .ysc
-    "player_controller", -- .ysc
-    "player_controller_b", -- .ysc
-    "player_scene_ft_franklin1", -- .ysc
-    "player_scene_f_lamgraff", -- .ysc
-    "player_scene_f_lamtaunt", -- .ysc
-    "player_scene_f_taxi", -- .ysc
-    "player_scene_mf_traffic", -- .ysc
-    "player_scene_m_cinema", -- .ysc
-    "player_scene_m_fbi2", -- .ysc
-    "player_scene_m_kids", -- .ysc
-    "player_scene_m_shopping", -- .ysc
-    "player_scene_t_bbfight", -- .ysc
-    "player_scene_t_chasecar", -- .ysc
-    "player_scene_t_insult", -- .ysc
-    "player_scene_t_park", -- .ysc
-    "player_scene_t_tie", -- .ysc
-    "player_timetable_scene", -- .ysc
-    "playthrough_builder", -- .ysc
-    "pm_defend", -- .ysc
-    "pm_delivery", -- .ysc
-    "pm_gang_attack", -- .ysc
-    "pm_plane_promotion", -- .ysc
-    "pm_recover_stolen", -- .ysc
-    "postkilled_bailbond2", -- .ysc
-    "postrc_barry1and2", -- .ysc
-    "postrc_barry4", -- .ysc
-    "postrc_epsilon4", -- .ysc
-    "postrc_nigel3", -- .ysc
-    "profiler_registration", -- .ysc
-    "prologue1", -- .ysc
-    "prop_drop", -- .ysc
-    "puzzle", -- .ysc
-    "racetest", -- .ysc
-    "rampage1", -- .ysc
-    "rampage2", -- .ysc
-    "rampage3", -- .ysc
-    "rampage4", -- .ysc
-    "rampage5", -- .ysc
-    "rampage_controller", -- .ysc
-    "randomchar_controller", -- .ysc
-    "range_modern", -- .ysc
-    "range_modern_mp", -- .ysc
-    "replay_controller", -- .ysc
-    "rerecord_recording", -- .ysc
-    "respawn_controller", -- .ysc
-    "restrictedareas", -- .ysc
-    "re_abandonedcar", -- .ysc
-    "re_accident", -- .ysc
-    "re_armybase", -- .ysc
-    "re_arrests", -- .ysc
-    "re_atmrobbery", -- .ysc
-    "re_bikethief", -- .ysc
-    "re_border", -- .ysc
-    "re_burials", -- .ysc
-    "re_bus_tours", -- .ysc
-    "re_cartheft", -- .ysc
-    "re_chasethieves", -- .ysc
-    "re_crashrescue", -- .ysc
-    "re_cultshootout", -- .ysc
-    "re_dealgonewrong", -- .ysc
-    "re_domestic", -- .ysc
-    "re_drunkdriver", -- .ysc
-    "re_duel", -- .ysc
-    "re_gangfight", -- .ysc
-    "re_gang_intimidation", -- .ysc
-    "re_getaway_driver", -- .ysc
-    "re_hitch_lift", -- .ysc
-    "re_homeland_security", -- .ysc
-    "re_lossantosintl", -- .ysc
-    "re_lured", -- .ysc
-    "re_monkey", -- .ysc
-    "re_mountdance", -- .ysc
-    "re_muggings", -- .ysc
-    "re_paparazzi", -- .ysc
-    "re_prison", -- .ysc
-    "re_prisonerlift", -- .ysc
-    "re_prisonvanbreak", -- .ysc
-    "re_rescuehostage", -- .ysc
-    "re_seaplane", -- .ysc
-    "re_securityvan", -- .ysc
-    "re_shoprobbery", -- .ysc
-    "re_snatched", -- .ysc
-    "re_stag_do", -- .ysc
-    "re_yetarian", -- .ysc
-    "rng_output", -- .ysc
-    "road_arcade", -- .ysc
-    "rollercoaster", -- .ysc
-    "rural_bank_heist", -- .ysc
-    "rural_bank_prep1", -- .ysc
-    "rural_bank_setup", -- .ysc
-    "salvage_yard_seating", -- .ysc
-    "savegame_bed", -- .ysc
-    "save_anywhere", -- .ysc
-    "scaleformgraphictest", -- .ysc
-    "scaleformminigametest", -- .ysc
-    "scaleformprofiling", -- .ysc
-    "scaleformtest", -- .ysc
-    "scene_builder", -- .ysc
-    "sclub_front_bouncer", -- .ysc
-    "scripted_cam_editor", -- .ysc
-    "scriptplayground", -- .ysc
-    "scripttest1", -- .ysc
-    "scripttest2", -- .ysc
-    "scripttest3", -- .ysc
-    "scripttest4", -- .ysc
-    "script_metrics", -- .ysc
-    "scroll_arcade_cabinet", -- .ysc
-    "sctv", -- .ysc
-    "sc_lb_global_block", -- .ysc
-    "selector", -- .ysc
-    "selector_example", -- .ysc
-    "selling_short_1", -- .ysc
-    "selling_short_2", -- .ysc
-    "shooting_camera", -- .ysc
-    "shoprobberies", -- .ysc
-    "shop_controller", -- .ysc
-    "shot_bikejump", -- .ysc
-    "shrinkletter", -- .ysc
-    "sh_intro_f_hills", -- .ysc
-    "sh_intro_m_home", -- .ysc
-    "simeon_showroom_seating", -- .ysc
-    "smoketest", -- .ysc
-    "social_controller", -- .ysc
-    "solomon1", -- .ysc
-    "solomon2", -- .ysc
-    "solomon3", -- .ysc
-    "spaceshipparts", -- .ysc
-    "spawn_activities", -- .ysc
-    "speech_reverb_tracker", -- .ysc
-    "spmc_instancer", -- .ysc
-    "spmc_preloader", -- .ysc
-    "sp_dlc_registration", -- .ysc
-    "sp_editor_mission_instance", -- .ysc
-    "sp_menuped", -- .ysc
-    "sp_pilotschool_reg", -- .ysc
-    "standard_global_init", -- .ysc
-    "standard_global_reg", -- .ysc
-    "startup", -- .ysc
-    "startup_install", -- .ysc
-    "startup_locationtest", -- .ysc
-    "startup_positioning", -- .ysc
-    "startup_smoketest", -- .ysc
-    "stats_controller", -- .ysc
-    "stock_controller", -- .ysc
-    "streaming", -- .ysc
-    "stripclub", -- .ysc
-    "stripclub_drinking", -- .ysc
-    "stripclub_mp", -- .ysc
-    "stripperhome", -- .ysc
-    "stunt_plane_races", -- .ysc
-    "tasklist_1", -- .ysc
-    "tattoo_shop", -- .ysc
-    "taxilauncher", -- .ysc
-    "taxiservice", -- .ysc
-    "taxitutorial", -- .ysc
-    "taxi_clowncar", -- .ysc
-    "taxi_cutyouin", -- .ysc
-    "taxi_deadline", -- .ysc
-    "taxi_followcar", -- .ysc
-    "taxi_gotyounow", -- .ysc
-    "taxi_gotyourback", -- .ysc
-    "taxi_needexcitement", -- .ysc
-    "taxi_procedural", -- .ysc
-    "taxi_takeiteasy", -- .ysc
-    "taxi_taketobest", -- .ysc
-    "tempalpha", -- .ysc
-    "temptest", -- .ysc
-    "tennis", -- .ysc
-    "tennis_ambient", -- .ysc
-    "tennis_family", -- .ysc
-    "tennis_network_mp", -- .ysc
-    "test_startup", -- .ysc
-    "thelastone", -- .ysc
-    "three_card_poker", -- .ysc
-    "timershud", -- .ysc
-    "title_update_registration", -- .ysc
-    "title_update_registration_2", -- .ysc
-    "tonya1", -- .ysc
-    "tonya2", -- .ysc
-    "tonya3", -- .ysc
-    "tonya4", -- .ysc
-    "tonya5", -- .ysc
-    "towing", -- .ysc
-    "traffickingsettings", -- .ysc
-    "traffickingteleport", -- .ysc
-    "traffick_air", -- .ysc
-    "traffick_ground", -- .ysc
-    "train_create_widget", -- .ysc
-    "train_tester", -- .ysc
-    "trevor1", -- .ysc
-    "trevor2", -- .ysc
-    "trevor3", -- .ysc
-    "trevor4", -- .ysc
-    "triathlonsp", -- .ysc
-    "tunables_registration", -- .ysc
-    "tuneables_processing", -- .ysc
-    "tuner_planning", -- .ysc
-    "tuner_property_carmod", -- .ysc
-    "tuner_sandbox_activity", -- .ysc
-    "turret_cam_script", -- .ysc
-    "ufo", -- .ysc
-    "ugc_global_registration", -- .ysc
-    "ugc_global_registration_2", -- .ysc
-    "underwaterpickups", -- .ysc
-    "utvc", -- .ysc
-    "vehiclespawning", -- .ysc
-    "vehicle_ai_test", -- .ysc
-    "vehicle_force_widget", -- .ysc
-    "vehicle_gen_controller", -- .ysc
-    "vehicle_plate", -- .ysc
-    "vehicle_stealth_mode", -- .ysc
-    "vehrob_planning", -- .ysc
-    "veh_play_widget", -- .ysc
-    "walking_ped", -- .ysc
-    "wardrobe_mp", -- .ysc
-    "wardrobe_sp", -- .ysc
-    "weapon_audio_widget", -- .ysc
-    "wizard_arcade", -- .ysc
-    "wp_partyboombox", -- .ysc
-    "xml_menus", -- .ysc
-    "yoga", -- .ysc
+    "abigail1",
+    "abigail2",
+    "achievement_controller",
+    "activity_creator_prototype_launcher",
+    "act_cinema",
+    "af_intro_t_sandy",
+    "agency_heist1",
+    "agency_heist2",
+    "agency_heist3a",
+    "agency_heist3b",
+    "agency_prep1",
+    "agency_prep2amb",
+    "aicover_test",
+    "ainewengland_test",
+    "altruist_cult",
+    "ambientblimp",
+    "ambient_diving",
+    "ambient_mrsphilips",
+    "ambient_solomon",
+    "ambient_sonar",
+    "ambient_tonya",
+    "ambient_tonyacall",
+    "ambient_tonyacall2",
+    "ambient_tonyacall5",
+    "ambient_ufos",
+    "am_agency_suv",
+    "am_airstrike",
+    "am_ammo_drop",
+    "am_arena_shp",
+    "am_armwrestling",
+    "am_armwrestling_apartment",
+    "am_armybase",
+    "am_backup_heli",
+    "am_beach_washup_cinematic",
+    "am_boat_taxi",
+    "am_bru_box",
+    "am_car_mod_tut",
+    "am_casino_limo",
+    "am_casino_luxury_car",
+    "am_casino_peds",
+    "am_challenges",
+    "am_contact_requests",
+    "am_cp_collection",
+    "am_crate_drop",
+    "am_criminal_damage",
+    "am_darts",
+    "am_darts_apartment",
+    "am_dead_drop",
+    "am_destroy_veh",
+    "am_distract_cops",
+    "am_doors",
+    "am_ferriswheel",
+    "am_gang_call",
+    "am_ga_pickups",
+    "am_heist_int",
+    "am_heli_taxi",
+    "am_hi_plane_land_cinematic",
+    "am_hi_plane_take_off_cinematic",
+    "am_hold_up",
+    "am_hot_property",
+    "am_hot_target",
+    "am_hs4_isd_take_vel",
+    "am_hs4_lsa_land_nimb_arrive",
+    "am_hs4_lsa_land_vel",
+    "am_hs4_lsa_take_vel",
+    "am_hs4_nimb_isd_lsa_leave",
+    "am_hs4_nimb_lsa_isd_arrive",
+    "am_hs4_nimb_lsa_isd_leave",
+    "am_hs4_vel_lsa_isd",
+    "am_hunt_the_beast",
+    "am_imp_exp",
+    "am_island_backup_heli",
+    "am_joyrider",
+    "am_kill_list",
+    "am_king_of_the_castle",
+    "am_launcher",
+    "am_lester_cut",
+    "am_lowrider_int",
+    "am_lsia_take_off_cinematic",
+    "am_luxury_showroom",
+    "am_mission_launch",
+    "am_mp_acid_lab",
+    "am_mp_arcade",
+    "am_mp_arcade_claw_crane",
+    "am_mp_arcade_fortune_teller",
+    "am_mp_arcade_love_meter",
+    "am_mp_arcade_peds",
+    "am_mp_arcade_strength_test",
+    "am_mp_arc_cab_manager",
+    "am_mp_arena_box",
+    "am_mp_arena_garage",
+    "am_mp_armory_aircraft",
+    "am_mp_armory_truck",
+    "am_mp_auto_shop",
+    "am_mp_biker_warehouse",
+    "am_mp_boardroom_seating",
+    "am_mp_bunker",
+    "am_mp_business_hub",
+    "am_mp_carwash_launch",
+    "am_mp_car_meet_property",
+    "am_mp_car_meet_sandbox",
+    "am_mp_casino",
+    "am_mp_casino_apartment",
+    "am_mp_casino_nightclub",
+    "am_mp_casino_valet_garage",
+    "am_mp_creator_aircraft",
+    "am_mp_creator_trailer",
+    "am_mp_defunct_base",
+    "am_mp_drone",
+    "am_mp_fixer_hq",
+    "am_mp_garage_control",
+    "am_mp_hacker_truck",
+    "am_mp_hangar",
+    "am_mp_ie_warehouse",
+    "am_mp_island",
+    "am_mp_juggalo_hideout",
+    "am_mp_multistorey_garage",
+    "am_mp_music_studio",
+    "am_mp_nightclub",
+    "am_mp_orbital_cannon",
+    "am_mp_peds",
+    "am_mp_property_ext",
+    "am_mp_property_int",
+    "am_mp_rc_vehicle",
+    "am_mp_salvage_yard",
+    "am_mp_shooting_range",
+    "am_mp_simeon_showroom",
+    "am_mp_smoking_activity",
+    "am_mp_smpl_interior_ext",
+    "am_mp_smpl_interior_int",
+    "am_mp_social_club_garage",
+    "am_mp_solomon_office",
+    "am_mp_submarine",
+    "am_mp_vehicle_organization_menu",
+    "am_mp_vehicle_reward",
+    "am_mp_vehicle_weapon",
+    "am_mp_vinewood_premium_garage",
+    "am_mp_warehouse",
+    "am_mp_yacht",
+    "am_npc_invites",
+    "am_pass_the_parcel",
+    "am_penned_in",
+    "am_penthouse_peds",
+    "am_pi_menu",
+    "am_plane_takedown",
+    "am_prison",
+    "am_prostitute",
+    "am_rollercoaster",
+    "am_rontrevor_cut",
+    "am_taxi",
+    "am_vehicle_spawn",
+    "animal_controller",
+    "apartment_minigame_launcher",
+    "apparcadebusiness",
+    "apparcadebusinesshub",
+    "appavengeroperations",
+    "appbikerbusiness",
+    "appbroadcast",
+    "appbunkerbusiness",
+    "appbusinesshub",
+    "appcamera",
+    "appchecklist",
+    "appcontacts",
+    "appcovertops",
+    "appemail",
+    "appextraction",
+    "appfixersecurity",
+    "apphackertruck",
+    "apphs_sleep",
+    "appimportexport",
+    "appinternet",
+    "appjipmp",
+    "appmedia",
+    "appmpbossagency",
+    "appmpemail",
+    "appmpjoblistnew",
+    "apporganiser",
+    "appprogresshub",
+    "apprepeatplay",
+    "appsecurohack",
+    "appsecuroserv",
+    "appsettings",
+    "appsidetask",
+    "appsmuggler",
+    "apptextmessage",
+    "apptrackify",
+    "appvlsi",
+    "appzit",
+    "arcade_seating",
+    "arena_box_bench_seats",
+    "arena_carmod",
+    "arena_workshop_seats",
+    "armenian1",
+    "armenian2",
+    "armenian3",
+    "armory_aircraft_carmod",
+    "assassin_bus",
+    "assassin_construction",
+    "assassin_hooker",
+    "assassin_multi",
+    "assassin_rankup",
+    "assassin_valet",
+    "atm_trigger",
+    "audiotest",
+    "autosave_controller",
+    "auto_shop_seating",
+    "bailbond1",
+    "bailbond2",
+    "bailbond3",
+    "bailbond4",
+    "bailbond_launcher",
+    "barry1",
+    "barry2",
+    "barry3",
+    "barry3a",
+    "barry3c",
+    "barry4",
+    "base_carmod",
+    "base_corridor_seats",
+    "base_entrance_seats",
+    "base_heist_seats",
+    "base_lounge_seats",
+    "base_quaters_seats",
+    "base_reception_seats",
+    "basic_creator",
+    "beach_exterior_seating",
+    "benchmark",
+    "bigwheel",
+    "bj",
+    "blackjack",
+    "blimptest",
+    "blip_controller",
+    "bootycallhandler",
+    "bootycall_debug_controller",
+    "buddydeathresponse",
+    "bugstar_mission_export",
+    "buildingsiteambience",
+    "building_controller",
+    "business_battles",
+    "business_battles_defend",
+    "business_battles_sell",
+    "business_hub_carmod",
+    "business_hub_garage_seats",
+    "cablecar",
+    "camera_test",
+    "camhedz_arcade",
+    "cam_coord_sender",
+    "candidate_controller",
+    "carmod_shop",
+    "carsteal1",
+    "carsteal2",
+    "carsteal3",
+    "carsteal4",
+    "carwash1",
+    "carwash2",
+    "car_meet_carmod",
+    "car_meet_exterior_seating",
+    "car_meet_interior_seating",
+    "car_roof_test",
+    "casinoroulette",
+    "casino_bar_seating",
+    "casino_exterior_seating",
+    "casino_interior_seating",
+    "casino_lucky_wheel",
+    "casino_main_lounge_seating",
+    "casino_nightclub_seating",
+    "casino_penthouse_seating",
+    "casino_slots",
+    "celebrations",
+    "celebration_editor",
+    "cellphone_controller",
+    "cellphone_flashhand",
+    "charactergoals",
+    "charanimtest",
+    "cheat_controller",
+    "chinese1",
+    "chinese2",
+    "chop",
+    "clothes_shop_mp",
+    "clothes_shop_sp",
+    "code_controller",
+    "combat_test",
+    "comms_controller",
+    "completionpercentage_controller",
+    "component_checker",
+    "context_controller",
+    "controller_ambientarea",
+    "controller_races",
+    "controller_taxi",
+    "controller_towing",
+    "controller_trafficking",
+    "coordinate_recorder",
+    "country_race",
+    "country_race_controller",
+    "creation_startup",
+    "creator",
+    "custom_config",
+    "cutscenemetrics",
+    "cutscenesamples",
+    "cutscene_test",
+    "darts",
+    "debug",
+    "debug_app_select_screen",
+    "debug_clone_outfit_testing",
+    "debug_launcher",
+    "debug_ped_data",
+    "degenatron_games",
+    "density_test",
+    "dialogue_handler",
+    "director_mode",
+    "docks2asubhandler",
+    "docks_heista",
+    "docks_heistb",
+    "docks_prep1",
+    "docks_prep2b",
+    "docks_setup",
+    "dont_cross_the_line",
+    "dreyfuss1",
+    "drf1",
+    "drf2",
+    "drf3",
+    "drf4",
+    "drf5",
+    "drunk",
+    "drunk_controller",
+    "dynamixtest",
+    "email_controller",
+    "emergencycall",
+    "emergencycalllauncher",
+    "epscars",
+    "epsdesert",
+    "epsilon1",
+    "epsilon2",
+    "epsilon3",
+    "epsilon4",
+    "epsilon5",
+    "epsilon6",
+    "epsilon7",
+    "epsilon8",
+    "epsilontract",
+    "epsrobes",
+    "error_listener",
+    "error_thrower",
+    "event_controller",
+    "exile1",
+    "exile2",
+    "exile3",
+    "exile_city_denial",
+    "extreme1",
+    "extreme2",
+    "extreme3",
+    "extreme4",
+    "fairgroundhub",
+    "fake_interiors",
+    "fameorshame_eps",
+    "fameorshame_eps_1",
+    "fame_or_shame_set",
+    "family1",
+    "family1taxi",
+    "family2",
+    "family3",
+    "family4",
+    "family5",
+    "family6",
+    "family_scene_f0",
+    "family_scene_f1",
+    "family_scene_m",
+    "family_scene_t0",
+    "family_scene_t1",
+    "fanatic1",
+    "fanatic2",
+    "fanatic3",
+    "fbi1",
+    "fbi2",
+    "fbi3",
+    "fbi4",
+    "fbi4_intro",
+    "fbi4_prep1",
+    "fbi4_prep2",
+    "fbi4_prep3",
+    "fbi4_prep3amb",
+    "fbi4_prep4",
+    "fbi4_prep5",
+    "fbi5a",
+    "finalea",
+    "finaleb",
+    "finalec1",
+    "finalec2",
+    "finale_choice",
+    "finale_credits",
+    "finale_endgame",
+    "finale_heist1",
+    "finale_heist2a",
+    "finale_heist2b",
+    "finale_heist2_intro",
+    "finale_heist_prepa",
+    "finale_heist_prepb",
+    "finale_heist_prepc",
+    "finale_heist_prepd",
+    "finale_heist_prepeamb",
+    "finale_intro",
+    "fixer_hq_carmod",
+    "fixer_hq_seating",
+    "fixer_hq_seating_op_floor",
+    "fixer_hq_seating_pq",
+    "floating_help_controller",
+    "flowintrotitle",
+    "flowstartaccept",
+    "flow_autoplay",
+    "flow_controller",
+    "flow_help",
+    "flyunderbridges",
+    "fmmc_contentquicklauncher",
+    "fmmc_launcher",
+    "fmmc_playlist_controller",
+    "fm_bj_race_controler",
+    "fm_capture_creator",
+    "fm_content_acid_lab_sell",
+    "fm_content_acid_lab_setup",
+    "fm_content_acid_lab_source",
+    "fm_content_ammunation",
+    "fm_content_armoured_truck",
+    "fm_content_auto_shop_delivery",
+    "fm_content_bank_shootout",
+    "fm_content_bar_resupply",
+    "fm_content_bicycle_time_trial",
+    "fm_content_bike_shop_delivery",
+    "fm_content_business_battles",
+    "fm_content_cargo",
+    "fm_content_cerberus",
+    "fm_content_chop_shop_delivery",
+    "fm_content_clubhouse_contracts",
+    "fm_content_club_management",
+    "fm_content_club_odd_jobs",
+    "fm_content_club_source",
+    "fm_content_convoy",
+    "fm_content_crime_scene",
+    "fm_content_drug_lab_work",
+    "fm_content_drug_vehicle",
+    "fm_content_export_cargo",
+    "fm_content_ghosthunt",
+    "fm_content_golden_gun",
+    "fm_content_gunrunning",
+    "fm_content_hsw_setup",
+    "fm_content_hsw_time_trial",
+    "fm_content_island_dj",
+    "fm_content_island_heist",
+    "fm_content_metal_detector",
+    "fm_content_movie_props",
+    "fm_content_mp_intro",
+    "fm_content_parachuter",
+    "fm_content_payphone_hit",
+    "fm_content_phantom_car",
+    "fm_content_possessed_animals",
+    "fm_content_robbery",
+    "fm_content_security_contract",
+    "fm_content_sightseeing",
+    "fm_content_skydive",
+    "fm_content_slasher",
+    "fm_content_smuggler_ops",
+    "fm_content_smuggler_plane",
+    "fm_content_smuggler_resupply",
+    "fm_content_smuggler_sell",
+    "fm_content_smuggler_trail",
+    "fm_content_source_research",
+    "fm_content_stash_house",
+    "fm_content_taxi_driver",
+    "fm_content_test",
+    "fm_content_tow_truck_work",
+    "fm_content_tuner_robbery",
+    "fm_content_vehicle_list",
+    "fm_content_vehrob_arena",
+    "fm_content_vehrob_cargo_ship",
+    "fm_content_vehrob_casino_prize",
+    "fm_content_vehrob_disrupt",
+    "fm_content_vehrob_police",
+    "fm_content_vehrob_prep",
+    "fm_content_vehrob_scoping",
+    "fm_content_vehrob_submarine",
+    "fm_content_vehrob_task",
+    "fm_content_vip_contract_1",
+    "fm_content_xmas_mugger",
+    "fm_content_xmas_truck",
+    "fm_deathmatch_controler",
+    "fm_deathmatch_creator",
+    "fm_hideout_controler",
+    "fm_hold_up_tut",
+    "fm_horde_controler",
+    "fm_impromptu_dm_controler",
+    "fm_intro",
+    "fm_intro_cut_dev",
+    "fm_lts_creator",
+    "fm_maintain_cloud_header_data",
+    "fm_maintain_transition_players",
+    "fm_main_menu",
+    "fm_mission_controller",
+    "fm_mission_controller_2020",
+    "fm_mission_creator",
+    "fm_race_controler",
+    "fm_race_creator",
+    "fm_street_dealer",
+    "fm_survival_controller",
+    "fm_survival_creator",
+    "forsalesigns",
+    "fps_test",
+    "fps_test_mag",
+    "franklin0",
+    "franklin1",
+    "franklin2",
+    "freemode",
+    "freemode_clearglobals",
+    "freemode_creator",
+    "freemode_init",
+    "friendactivity",
+    "friends_controller",
+    "friends_debug_controller",
+    "fullmap_test",
+    "fullmap_test_flow",
+    "game_server_test",
+    "gb_airfreight",
+    "gb_amphibious_assault",
+    "gb_assault",
+    "gb_bank_job",
+    "gb_bellybeast",
+    "gb_biker_bad_deal",
+    "gb_biker_burn_assets",
+    "gb_biker_contraband_defend",
+    "gb_biker_contraband_sell",
+    "gb_biker_contract_killing",
+    "gb_biker_criminal_mischief",
+    "gb_biker_destroy_vans",
+    "gb_biker_driveby_assassin",
+    "gb_biker_free_prisoner",
+    "gb_biker_joust",
+    "gb_biker_last_respects",
+    "gb_biker_race_p2p",
+    "gb_biker_rescue_contact",
+    "gb_biker_rippin_it_up",
+    "gb_biker_safecracker",
+    "gb_biker_search_and_destroy",
+    "gb_biker_shuttle",
+    "gb_biker_stand_your_ground",
+    "gb_biker_steal_bikes",
+    "gb_biker_target_rival",
+    "gb_biker_unload_weapons",
+    "gb_biker_wheelie_rider",
+    "gb_carjacking",
+    "gb_cashing_out",
+    "gb_casino",
+    "gb_casino_heist",
+    "gb_casino_heist_planning",
+    "gb_collect_money",
+    "gb_contraband_buy",
+    "gb_contraband_defend",
+    "gb_contraband_sell",
+    "gb_data_hack",
+    "gb_deathmatch",
+    "gb_delivery",
+    "gb_finderskeepers",
+    "gb_fivestar",
+    "gb_fortified",
+    "gb_fragile_goods",
+    "gb_fully_loaded",
+    "gb_gangops",
+    "gb_gang_ops_planning",
+    "gb_gunrunning",
+    "gb_gunrunning_defend",
+    "gb_gunrunning_delivery",
+    "gb_headhunter",
+    "gb_hunt_the_boss",
+    "gb_ie_delivery_cutscene",
+    "gb_illicit_goods_resupply",
+    "gb_infiltration",
+    "gb_jewel_store_grab",
+    "gb_ploughed",
+    "gb_point_to_point",
+    "gb_ramped_up",
+    "gb_rob_shop",
+    "gb_salvage",
+    "gb_security_van",
+    "gb_sightseer",
+    "gb_smuggler",
+    "gb_stockpiling",
+    "gb_target_pursuit",
+    "gb_terminate",
+    "gb_transporter",
+    "gb_vehicle_export",
+    "gb_velocity",
+    "gb_yacht_rob",
+    "general_test",
+    "ggsm_arcade",
+    "globals_fmmcstruct2_registration",
+    "globals_fmmc_struct_registration",
+    "golf",
+    "golf_ai_foursome",
+    "golf_ai_foursome_putting",
+    "golf_mp",
+    "gpb_andymoon",
+    "gpb_baygor",
+    "gpb_billbinder",
+    "gpb_clinton",
+    "gpb_griff",
+    "gpb_jane",
+    "gpb_jerome",
+    "gpb_jesse",
+    "gpb_mani",
+    "gpb_mime",
+    "gpb_pameladrake",
+    "gpb_superhero",
+    "gpb_tonya",
+    "gpb_zombie",
+    "grid_arcade_cabinet",
+    "gtest_airplane",
+    "gtest_avoidance",
+    "gtest_boat",
+    "gtest_divingfromcar",
+    "gtest_divingfromcarwhilefleeing",
+    "gtest_helicopter",
+    "gtest_nearlymissedbycar",
+    "gunclub_shop",
+    "gunfighttest",
+    "gunslinger_arcade",
+    "hacker_truck_carmod",
+    "hairdo_shop_mp",
+    "hairdo_shop_sp",
+    "hangar_carmod",
+    "hao1",
+    "headertest",
+    "heatmap_test",
+    "heatmap_test_flow",
+    "heist_ctrl_agency",
+    "heist_ctrl_docks",
+    "heist_ctrl_finale",
+    "heist_ctrl_jewel",
+    "heist_ctrl_rural",
+    "heist_island_planning",
+    "heli_gun",
+    "heli_streaming",
+    "hud_creator",
+    "hunting1",
+    "hunting2",
+    "hunting_ambient",
+    "idlewarper",
+    "ingamehud",
+    "initial",
+    "item_ownership_output",
+    "jewelry_heist",
+    "jewelry_prep1a",
+    "jewelry_prep1b",
+    "jewelry_prep2a",
+    "jewelry_setup1",
+    "josh1",
+    "josh2",
+    "josh3",
+    "josh4",
+    "juggalo_hideout_carmod",
+    "juggalo_hideout_seating",
+    "lamar1",
+    "landing_pre_startup",
+    "laptop_trigger",
+    "launcher_abigail",
+    "launcher_barry",
+    "launcher_basejumpheli",
+    "launcher_basejumppack",
+    "launcher_carwash",
+    "launcher_darts",
+    "launcher_dreyfuss",
+    "launcher_epsilon",
+    "launcher_extreme",
+    "launcher_fanatic",
+    "launcher_golf",
+    "launcher_hao",
+    "launcher_hunting",
+    "launcher_hunting_ambient",
+    "launcher_josh",
+    "launcher_maude",
+    "launcher_minute",
+    "launcher_mrsphilips",
+    "launcher_nigel",
+    "launcher_offroadracing",
+    "launcher_omega",
+    "launcher_paparazzo",
+    "launcher_pilotschool",
+    "launcher_racing",
+    "launcher_rampage",
+    "launcher_range",
+    "launcher_stunts",
+    "launcher_tennis",
+    "launcher_thelastone",
+    "launcher_tonya",
+    "launcher_triathlon",
+    "launcher_yoga",
+    "lester1",
+    "lesterhandler",
+    "letterscraps",
+    "line_activation_test",
+    "liverecorder",
+    "locates_tester",
+    "luxe_veh_activity",
+    "magdemo",
+    "magdemo2",
+    "main",
+    "maintransition",
+    "main_install",
+    "main_persistent",
+    "martin1",
+    "maude1",
+    "maude_postbailbond",
+    "me_amanda1",
+    "me_jimmy1",
+    "me_tracey1",
+    "mg_race_to_point",
+    "michael1",
+    "michael2",
+    "michael3",
+    "michael4",
+    "michael4leadout",
+    "minigame_ending_stinger",
+    "minigame_stats_tracker",
+    "minute1",
+    "minute2",
+    "minute3",
+    "missioniaaturret",
+    "mission_race",
+    "mission_repeat_controller",
+    "mission_stat_alerter",
+    "mission_stat_watcher",
+    "mission_triggerer_a",
+    "mission_triggerer_b",
+    "mission_triggerer_c",
+    "mission_triggerer_d",
+    "mmmm",
+    "mpstatsinit",
+    "mptestbed",
+    "mp_awards",
+    "mp_bed_high",
+    "mp_fm_registration",
+    "mp_gameplay_menu",
+    "mp_menuped",
+    "mp_player_damage_numbers",
+    "mp_prop_global_block",
+    "mp_prop_special_global_block",
+    "mp_registration",
+    "mp_save_game_global_block",
+    "mp_skycam_stuck_wiggler",
+    "mp_unlocks",
+    "mp_weapons",
+    "mrsphilips1",
+    "mrsphilips2",
+    "multistorey_garage_ext_seating",
+    "multistorey_garage_seating",
+    "murdermystery",
+    "music_studio_seating",
+    "music_studio_seating_external",
+    "music_studio_smoking",
+    "navmeshtest",
+    "net_activity_creator_ui",
+    "net_apartment_activity",
+    "net_apartment_activity_light",
+    "net_bot_brain",
+    "net_bot_simplebrain",
+    "net_cloud_mission_loader",
+    "net_combat_soaktest",
+    "net_freemode_debug_2023",
+    "net_freemode_debug_stat_2023",
+    "net_jacking_soaktest",
+    "net_session_soaktest",
+    "net_test_drive",
+    "net_tunable_check",
+    "nigel1",
+    "nigel1a",
+    "nigel1b",
+    "nigel1c",
+    "nigel1d",
+    "nigel2",
+    "nigel3",
+    "nightclubpeds",
+    "nightclub_ground_floor_seats",
+    "nightclub_office_seats",
+    "nightclub_vip_seats",
+    "nodemenututorial",
+    "nodeviewer",
+    "ob_abatdoor",
+    "ob_abattoircut",
+    "ob_airdancer",
+    "ob_bong",
+    "ob_cashregister",
+    "ob_drinking_shots",
+    "ob_found_instancery_cauldron",
+    "ob_franklin_beer",
+    "ob_franklin_tv",
+    "ob_franklin_wine",
+    "ob_huffing_gas",
+    "ob_jukebox",
+    "ob_mp_bed_high",
+    "ob_mp_bed_low",
+    "ob_mp_bed_med",
+    "ob_mp_shower_med",
+    "ob_mp_stripper",
+    "ob_mr_raspberry_jam",
+    "ob_poledancer",
+    "ob_sofa_franklin",
+    "ob_sofa_michael",
+    "ob_telescope",
+    "ob_tv",
+    "ob_vend1",
+    "ob_vend2",
+    "ob_wheatgrass",
+    "offroad_races",
+    "omega1",
+    "omega2",
+    "paparazzo1",
+    "paparazzo2",
+    "paparazzo3",
+    "paparazzo3a",
+    "paparazzo3b",
+    "paparazzo4",
+    "paradise",
+    "paradise2",
+    "pausemenu",
+    "pausemenucareerhublaunch",
+    "pausemenu_example",
+    "pausemenu_map",
+    "pausemenu_multiplayer",
+    "pausemenu_sp_repeat",
+    "pb_busker",
+    "pb_homeless",
+    "pb_preacher",
+    "pb_prostitute",
+    "personal_carmod_shop",
+    "photographymonkey",
+    "photographywildlife",
+    "physics_perf_test",
+    "physics_perf_test_launcher",
+    "pickuptest",
+    "pickupvehicles",
+    "pickup_controller",
+    "pilot_school",
+    "pilot_school_mp",
+    "pi_menu",
+    "placeholdermission",
+    "placementtest",
+    "planewarptest",
+    "player_controller",
+    "player_controller_b",
+    "player_scene_ft_franklin1",
+    "player_scene_f_lamgraff",
+    "player_scene_f_lamtaunt",
+    "player_scene_f_taxi",
+    "player_scene_mf_traffic",
+    "player_scene_m_cinema",
+    "player_scene_m_fbi2",
+    "player_scene_m_kids",
+    "player_scene_m_shopping",
+    "player_scene_t_bbfight",
+    "player_scene_t_chasecar",
+    "player_scene_t_insult",
+    "player_scene_t_park",
+    "player_scene_t_tie",
+    "player_timetable_scene",
+    "playthrough_builder",
+    "pm_defend",
+    "pm_delivery",
+    "pm_gang_attack",
+    "pm_plane_promotion",
+    "pm_recover_stolen",
+    "postkilled_bailbond2",
+    "postrc_barry1and2",
+    "postrc_barry4",
+    "postrc_epsilon4",
+    "postrc_nigel3",
+    "profiler_registration",
+    "prologue1",
+    "prop_drop",
+    "puzzle",
+    "racetest",
+    "rampage1",
+    "rampage2",
+    "rampage3",
+    "rampage4",
+    "rampage5",
+    "rampage_controller",
+    "randomchar_controller",
+    "range_modern",
+    "range_modern_mp",
+    "replay_controller",
+    "rerecord_recording",
+    "respawn_controller",
+    "restrictedareas",
+    "re_abandonedcar",
+    "re_accident",
+    "re_armybase",
+    "re_arrests",
+    "re_atmrobbery",
+    "re_bikethief",
+    "re_border",
+    "re_burials",
+    "re_bus_tours",
+    "re_cartheft",
+    "re_chasethieves",
+    "re_crashrescue",
+    "re_cultshootout",
+    "re_dealgonewrong",
+    "re_domestic",
+    "re_drunkdriver",
+    "re_duel",
+    "re_gangfight",
+    "re_gang_intimidation",
+    "re_getaway_driver",
+    "re_hitch_lift",
+    "re_homeland_security",
+    "re_lossantosintl",
+    "re_lured",
+    "re_monkey",
+    "re_mountdance",
+    "re_muggings",
+    "re_paparazzi",
+    "re_prison",
+    "re_prisonerlift",
+    "re_prisonvanbreak",
+    "re_rescuehostage",
+    "re_seaplane",
+    "re_securityvan",
+    "re_shoprobbery",
+    "re_snatched",
+    "re_stag_do",
+    "re_yetarian",
+    "rng_output",
+    "road_arcade",
+    "rollercoaster",
+    "rural_bank_heist",
+    "rural_bank_prep1",
+    "rural_bank_setup",
+    "salvage_yard_seating",
+    "savegame_bed",
+    "save_anywhere",
+    "scaleformgraphictest",
+    "scaleformminigametest",
+    "scaleformprofiling",
+    "scaleformtest",
+    "scene_builder",
+    "sclub_front_bouncer",
+    "scripted_cam_editor",
+    "scriptplayground",
+    "scripttest1",
+    "scripttest2",
+    "scripttest3",
+    "scripttest4",
+    "script_metrics",
+    "scroll_arcade_cabinet",
+    "sctv",
+    "sc_lb_global_block",
+    "selector",
+    "selector_example",
+    "selling_short_1",
+    "selling_short_2",
+    "shooting_camera",
+    "shoprobberies",
+    "shop_controller",
+    "shot_bikejump",
+    "shrinkletter",
+    "sh_intro_f_hills",
+    "sh_intro_m_home",
+    "simeon_showroom_seating",
+    "smoketest",
+    "social_controller",
+    "solomon1",
+    "solomon2",
+    "solomon3",
+    "spaceshipparts",
+    "spawn_activities",
+    "speech_reverb_tracker",
+    "spmc_instancer",
+    "spmc_preloader",
+    "sp_dlc_registration",
+    "sp_editor_mission_instance",
+    "sp_menuped",
+    "sp_pilotschool_reg",
+    "standard_global_init",
+    "standard_global_reg",
+    "startup",
+    "startup_install",
+    "startup_locationtest",
+    "startup_positioning",
+    "startup_smoketest",
+    "stats_controller",
+    "stock_controller",
+    "streaming",
+    "stripclub",
+    "stripclub_drinking",
+    "stripclub_mp",
+    "stripperhome",
+    "stunt_plane_races",
+    "tasklist_1",
+    "tattoo_shop",
+    "taxilauncher",
+    "taxiservice",
+    "taxitutorial",
+    "taxi_clowncar",
+    "taxi_cutyouin",
+    "taxi_deadline",
+    "taxi_followcar",
+    "taxi_gotyounow",
+    "taxi_gotyourback",
+    "taxi_needexcitement",
+    "taxi_procedural",
+    "taxi_takeiteasy",
+    "taxi_taketobest",
+    "tempalpha",
+    "temptest",
+    "tennis",
+    "tennis_ambient",
+    "tennis_family",
+    "tennis_network_mp",
+    "test_startup",
+    "thelastone",
+    "three_card_poker",
+    "timershud",
+    "title_update_registration",
+    "title_update_registration_2",
+    "tonya1",
+    "tonya2",
+    "tonya3",
+    "tonya4",
+    "tonya5",
+    "towing",
+    "traffickingsettings",
+    "traffickingteleport",
+    "traffick_air",
+    "traffick_ground",
+    "train_create_widget",
+    "train_tester",
+    "trevor1",
+    "trevor2",
+    "trevor3",
+    "trevor4",
+    "triathlonsp",
+    "tunables_registration",
+    "tuneables_processing",
+    "tuner_planning",
+    "tuner_property_carmod",
+    "tuner_sandbox_activity",
+    "turret_cam_script",
+    "ufo",
+    "ugc_global_registration",
+    "ugc_global_registration_2",
+    "underwaterpickups",
+    "utvc",
+    "vehiclespawning",
+    "vehicle_ai_test",
+    "vehicle_force_widget",
+    "vehicle_gen_controller",
+    "vehicle_plate",
+    "vehicle_stealth_mode",
+    "vehrob_planning",
+    "veh_play_widget",
+    "walking_ped",
+    "wardrobe_mp",
+    "wardrobe_sp",
+    "weapon_audio_widget",
+    "wizard_arcade",
+    "wp_partyboombox",
+    "xml_menus",
+    "yoga",
 }
 
 local scripts_table = {}
