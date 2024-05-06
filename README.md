@@ -2,9 +2,10 @@
 
 ## Description
 
-Formerly created by NotYourDope [on PS3](https://playersquared.com/threads/nyd-projects-collection-v3.3255/), here implemented in Lua for Stand. 
+Formerly created [by NotYourDope on PS3](https://playersquared.com/threads/nyd-projects-collection-v3.3255/), here implemented in Lua for Stand. 
 
-While this script is active, you will be notified whenever a Rockstar script is loaded/unloaded. This can be especially useful for developers trying to figure out how something works.
+While this script is active, you will be notified whenever a Rockstar script is loaded/unloaded.<br>
+This can be especially useful for developers trying to figure out how something works.
 
 ## Screenshots
 
