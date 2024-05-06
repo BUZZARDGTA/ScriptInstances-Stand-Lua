@@ -1,12 +1,12 @@
--- Formerly created by NotYourDope on PS3, here implemented in Lua for Stand by IB_U_Z_Z_A_R_Dl.
+-- Formerly created by NotYourDope on PS3 and Xbox 360, here implemented in Lua for Stand by IB_U_Z_Z_A_R_Dl.
 -- https://playersquared.com/threads/nyd-projects-collection-v3.3255/
 
 
 function pluralize(word, count)
-    if count <= 1 then
-        return word
-    else
+    if count > 1 then
         return word .. "s"
+    else
+        return word
     end
 end
 
