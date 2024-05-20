@@ -35,12 +35,12 @@ LOGGING_SETTINGS:toggle("Log Results in Console Output", {}, "Logs found and los
     logInConsole = toggle
 end, logInConsole)
 
-MY_ROOT:divider("---------------------------------------")
+MY_ROOT:divider(string.rep("-", 35))
 local SCRIPTS_LIST <const> = MY_ROOT:list("Scripts List", {}, "An alphabetically sorted list of all Rockstar scripts, displaying the number of instances for each.")
 SCRIPTS_LIST:toggle("Show All Scripts", {}, "When enabled, displays both active and inactive scripts.", function(toggle)
     showAllScripts = toggle
 end, showAllScripts)
-local SCRIPTS_DIVIDER = SCRIPTS_LIST:divider("---------------------------------------")
+local SCRIPTS_DIVIDER = SCRIPTS_LIST:divider(string.rep("-", 40))
 
 -- [06/04/2024] These *.ysc scripts were scraped from OpenIV's path: "GTAV\update\update2.rpf\x64\levels\gta5\script\script_rel.rpf\".
 local scripts_list <const> = {
@@ -1128,7 +1128,7 @@ local function is_any_menu_CommandRef_script_attached()
         end
     end
 
-    return  false
+    return false
 end
 
 local function get_menu_CommandRef_script_to_attach(base_script_name)
@@ -1165,6 +1165,25 @@ local function attachCommandRef(script_name, script)
         script.CommandRef = menu.attach_before(CommandRef_script_to_attach, script.CommandUniqPtr)
     end
 end
+
+local consoleQueue = {}
+
+local function addToConsoleQueue(entry)
+    table.insert(consoleQueue, entry)
+end
+
+local function processConsoleQueueSyncroniously(consoleQueue)
+    while true do
+        util.yield()
+
+        if #consoleQueue > 0 then
+            local entry = table.remove(consoleQueue, 1)
+            util.toast(entry, TOAST_CONSOLE)
+        end
+    end
+end
+
+util.create_thread(processConsoleQueueSyncroniously, consoleQueue)
 
 util.create_tick_handler(function()
     for _, script_name in ipairs(scripts_list) do
@@ -1207,7 +1226,7 @@ util.create_tick_handler(function()
             end
 
             if logInConsole then
-                print(text)
+                addToConsoleQueue(text)
             end
             if logInToast then
                 util.toast(text)
