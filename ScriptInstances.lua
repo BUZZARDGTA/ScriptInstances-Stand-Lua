@@ -21,7 +21,26 @@ local generateInstanceLostMessage = function(script_name)
     return '"' .. script_name .. '"' .. " is no longer active"
 end
 
+local MY_ROOT <const> = menu.my_root()
 local joaat <const> = util.joaat
+
+local logInToast = true
+local logInConsole = true
+
+local LOGGING_SETTINGS <const> = MY_ROOT:list("Logging Settings", {}, "Options for logging script activity and display settings.")
+LOGGING_SETTINGS:toggle("Log Results in Toast Notificaitons", {}, "Logs found and lost scripts in Stand's Toast Notifications.", function(toggle)
+    logInToast = toggle
+end, logInToast)
+LOGGING_SETTINGS:toggle("Log Results in Console Output", {}, "Logs found and lost scripts in Stand's Console Output.", function(toggle)
+    logInConsole = toggle
+end, logInConsole)
+
+MY_ROOT:divider("---------------------------------------")
+local SCRIPTS_LIST <const> = MY_ROOT:list("Scripts List", {}, "An alphabetically sorted list of all Rockstar scripts, displaying the number of instances for each.")
+SCRIPTS_LIST:toggle("Show All Scripts", {}, "When enabled, displays both active and inactive scripts.", function(toggle)
+    showAllScripts = toggle
+end, showAllScripts)
+local SCRIPTS_DIVIDER = SCRIPTS_LIST:divider("---------------------------------------")
 
 -- [06/04/2024] These *.ysc scripts were scraped from OpenIV's path: "GTAV\update\update2.rpf\x64\levels\gta5\script\script_rel.rpf\".
 local scripts_list <const> = {
@@ -1094,39 +1113,117 @@ local scripts_list <const> = {
 local scripts_table = {}
 
 for _, script_name in ipairs(scripts_list) do
-    scripts_table[script_name] = 0
+    scripts_table[script_name] = {
+        instances = 0,
+        CommandUniqPtr = menu.detach(SCRIPTS_LIST:readonly(script_name, 0)),
+    }
 end
 
-while true do
-    for script_name, script_instances in pairs(scripts_table) do
-        local current_script_instances = GET_NUMBER_OF_THREADS_RUNNING_THE_SCRIPT_WITH_THIS_HASH(
-            joaat(script_name)
-        )
-        local text
+local function is_any_menu_CommandRef_script_attached()
+    for _, script_name in ipairs(scripts_list) do
+        local script = scripts_table[script_name]
 
-        if
-            script_instances >= 1
-            and current_script_instances == 0
-        then
-            text = generateInstanceLostMessage(script_name)
-        elseif
-            current_script_instances >= 1
-            and script_instances == 0
-        then
-            text = generateFoundInstanceMessage(script_name, current_script_instances)
-        elseif
-            current_script_instances ~= script_instances
-        then
-            text = generateFoundInstanceMessage(script_name, current_script_instances)
-        end
-
-        scripts_table[script_name] = current_script_instances
-
-        if text then
-            util.toast(text)
-            print(text)
+        if script.CommandRef then
+            return true
         end
     end
 
-    util.yield()
+    return  false
 end
+
+local function get_menu_CommandRef_script_to_attach(base_script_name)
+    if not is_any_menu_CommandRef_script_attached() then
+        return "after", SCRIPTS_DIVIDER
+    end
+
+    local return_next_valid_CommandRef = false
+    local prev_valid_CommandRef = nil
+
+    for _, script_name in ipairs(scripts_list) do
+        local script = scripts_table[script_name]
+
+        if script_name == base_script_name then
+            if prev_valid_CommandRef then
+                return "after", prev_valid_CommandRef
+            end
+            return_next_valid_CommandRef = true
+        elseif script.CommandRef then
+            if return_next_valid_CommandRef then
+                return "before", script.CommandRef
+            else
+                prev_valid_CommandRef = script.CommandRef
+            end
+        end
+    end
+end
+
+local function attachCommandRef(script_name, script)
+    local where, CommandRef_script_to_attach = get_menu_CommandRef_script_to_attach(script_name)
+    if where == "after" then
+        script.CommandRef = menu.attach_after(CommandRef_script_to_attach, script.CommandUniqPtr)
+    elseif where == "before" then
+        script.CommandRef = menu.attach_before(CommandRef_script_to_attach, script.CommandUniqPtr)
+    end
+end
+
+util.create_tick_handler(function()
+    for _, script_name in ipairs(scripts_list) do
+        local script = scripts_table[script_name]
+
+        local current_script_instances = GET_NUMBER_OF_THREADS_RUNNING_THE_SCRIPT_WITH_THIS_HASH(joaat(script_name))
+        local script_lost = false
+        local script_found = false
+
+        if script.instances >= 1 and current_script_instances == 0 then
+            script_lost = true
+        elseif current_script_instances >= 1 and script.instances == 0 then
+            script_found = true
+        elseif current_script_instances ~= script.instances then
+            script_found = true
+        end
+
+        script.instances = current_script_instances
+
+        if script_found or script_lost then
+            local text
+
+            if script_found then
+                text = generateFoundInstanceMessage(script_name, script.instances)
+
+                if script.CommandUniqPtr then
+                    attachCommandRef(script_name, script)
+                    script.CommandUniqPtr = nil
+                end
+                menu.set_value(script.CommandRef, script.instances)
+            elseif script_lost then
+                text = generateInstanceLostMessage(script_name)
+
+                if showAllScripts then
+                    menu.set_value(script.CommandRef, script.instances)
+                else
+                    script.CommandUniqPtr = menu.detach(script.CommandRef)
+                    script.CommandRef = nil
+                end
+            end
+
+            if logInConsole then
+                print(text)
+            end
+            if logInToast then
+                util.toast(text)
+            end
+
+        elseif showAllScripts then
+            if script.CommandUniqPtr then
+                attachCommandRef(script_name, script)
+                script.CommandUniqPtr = nil
+            end
+            menu.set_value(script.CommandRef, script.instances)
+        elseif script.CommandRef then
+            if script.instances == 0 then
+                script.CommandUniqPtr = menu.detach(script.CommandRef)
+                script.CommandRef = nil
+            end
+        end
+    end
+end)
