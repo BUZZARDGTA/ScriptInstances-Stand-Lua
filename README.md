@@ -9,6 +9,15 @@ This can be especially useful for developers trying to figure out how something 
 
 ## Screenshots
 
+### <div align="center">Menu:</div>
+
+| Script Instances       | Logging Settings       | Scripts List           | Scripts List (all)
+| ---------------------- | ---------------------- | ---------------------- | ----------------------
+| ![Script Instances](https://github.com/Illegal-Services/ScriptInstances-Lua/assets/62464560/74e471e5-caba-48a1-943f-27a5db9daff6) | ![Logging Settings](https://github.com/Illegal-Services/ScriptInstances-Lua/assets/62464560/8346b95e-5ad2-4ffc-ba17-7e217220f724) | ![Scripts List](https://github.com/Illegal-Services/ScriptInstances-Lua/assets/62464560/601323bf-78cd-4bd6-b54c-199528a85a47) | ![Scripts List (all)](https://github.com/Illegal-Services/ScriptInstances-Lua/assets/62464560/e9aaafee-1edd-449b-9b2f-897d769604f2)
+
+
+
+
 ### <div align="center">Toast Notifications:</div>
 
 <div align="center">
