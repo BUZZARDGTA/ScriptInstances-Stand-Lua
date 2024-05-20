@@ -1115,7 +1115,7 @@ local scripts_table = {}
 for _, script_name in ipairs(scripts_list) do
     scripts_table[script_name] = {
         instances = 0,
-        CommandUniqPtr = menu.detach(SCRIPTS_LIST:readonly(script_name, 0)),
+        CommandUniqPtr = menu.shadow_root():readonly(script_name, 0),
     }
 end
 
