@@ -1,6 +1,6 @@
 # Script Instances
 
-Formerly created [by NotYourDope on PS3 and Xbox 360](https://playersquared.com/threads/nyd-projects-collection-v3.3255/), here implemented in Lua for Stand. 
+Formerly created [by NotYourDope on PS3 and Xbox 360](https://playersquared.com/threads/nyd-projects-collection-v3.3255/), here implemented on PC in Lua for Stand menu.
 
 ## Description
 
